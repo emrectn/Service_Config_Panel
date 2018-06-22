@@ -1,0 +1,98 @@
+<html>
+<head>
+	<head th:replace="fragments/header :: header('Blog index')" />
+</head>
+<body>
+	<div id="app-menu">
+		<navbar th:replace="fragments/navbar :: navbar"/>
+	</div>
+	
+	<div id="app" class="container" >
+		<div v-show="selected=='home'">
+		  <h2>Service Configs</h2>
+		  <p>List of configs</p>            
+		  <table class="table table-striped">
+		    <thead>
+		      <tr>
+		        <th>ID</th>
+		        <th>NAME</th>
+		        <th>TYPE</th>
+		        <th>VALUE</th>
+		        <th>IS_ACTIVE</th>
+		        <th>APPLICATIONNAME</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr v-for="config in configs">
+		        <td>{{config.id}}</td>
+		        <td>{{config.name}}</td>
+		        <td>{{config.type}}</td>
+		        <td>{{config.value}}</td>
+		        <td>{{config.isIsActive}}</td>
+		        <td>{{config.applicationName}}</td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+		<div v-show="selected=='add'">
+			<div th:replace="fragments/add :: main-form"></div>
+		</div>
+		
+		<div v-show="selected=='delete'">
+			<div th:replace="fragments/delete :: delete-form"></div>
+		</div>
+	</div>	
+</body>
+<div th:replace="fragments/footer :: foot"></div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			'configs': [],
+			'selected': 'home'},
+        mounted(){
+            this.fetchConfigs();
+        },
+        methods: {
+            fetchConfigs(){
+                axios.get("/findall").then(function(response){
+                	console.log(response.data)
+                    this.configs = response.data;
+                }.bind(this));
+            },
+            deleteConfig(){
+            	id = document.getElementById('id').value;
+            	console.log(id);
+            	axios.get("/delete?id="+id);
+            }
+        }
+	});
+	
+	app_menu = new Vue({
+	    'el': '#app-menu',
+	    'data': {
+	        'selected': ''
+	    },
+        'created': function () {
+        	axios.get("/save");	
+        },
+	    'methods': {
+	        'home_onclick': function() {
+	            app.selected = 'home';
+	            app.fetchConfigs();
+	            console.log('home');
+	        },
+	        'add_onclick': function() {
+
+	            app.selected = 'add';
+	            console.log('add');
+
+	        },
+	        'delete_onclick': function() {
+	            app.selected = 'delete';
+	            console.log('delete');
+	        },
+	    }
+	});
+</script>
+</html>
