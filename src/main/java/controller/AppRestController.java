@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,8 +33,10 @@ public class AppRestController {
         model.addAttribute("mesaj", mesajicerigi);
     }
 	
-	@RequestMapping("/add")
-	public void addConfig() {
+	@PostMapping("/add")
+	public String addConfig(@RequestBody ServiceConfig serviceConfig) {
+		serviceRepo.save(serviceConfig);
+		return serviceConfig.toString();
 	}
 	
 	@RequestMapping("/get")
@@ -41,6 +45,13 @@ public class AppRestController {
 		if (!serviceRepo.findByName(name).isEmpty() && serviceRepo.findByName(name).get(0) != null)
 			return serviceRepo.findByName(name).get(0).getValue();
 		return "{'status':'error'}";
+	}
+	
+	@RequestMapping("/getType")
+	public String getType(@RequestParam("name") String name) {	
+		
+		ConfigurationReader<Integer> configReader = new ConfigurationReader<>("yeni");
+		return null;
 	}
 		
 	@RequestMapping("/save")
