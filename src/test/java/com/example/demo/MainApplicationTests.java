@@ -16,8 +16,8 @@ public class MainApplicationTests {
 	private AppRestController appRestController;
 	
 	@Test
-	public void test_helloWorldReturnsValidResponse() {
-		appRestController.addConfig(null);
-
+	public void test_saveData() {
+		appRestController.saveData();
+		System.out.println(appRestController.findAll());
 	}
 }
