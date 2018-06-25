@@ -1,6 +1,4 @@
-package com.spring.model;
-
-import java.io.Serializable;
+package com.example.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="t_service")
- public class ServiceConfig {
+ public class AppConfiguration {
 		
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,16 +25,16 @@ import javax.persistence.Table;
 	private String value;
 
 	@Column(name = "isActive")
-	private boolean isActive;
+	private Boolean isActive;
 
 	@Column(name = "applicationName")
 	private String applicationName;
 	
-	public ServiceConfig() {
+	public AppConfiguration() {
 		super();
 	}
 
-	public ServiceConfig(String name, String type, String value, boolean isActive, String applicationName) {
+	public AppConfiguration(String name, String type, String value, boolean isActive, String applicationName) {
 		super();
 		this.id = -1;
 		this.name = name;
@@ -57,7 +55,7 @@ import javax.persistence.Table;
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}

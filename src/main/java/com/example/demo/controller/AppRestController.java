@@ -1,4 +1,4 @@
-package controller;
+package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,16 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.ConfigurationReader;
-import com.example.demo.ServiceRepository;
-import com.spring.model.ServiceConfig;
+import com.example.demo.model.AppConfiguration;
+import com.example.demo.repository.ConfigurationRepository;
 
 @RestController
 public class AppRestController {
 	
 	@Autowired
-	@Qualifier("serviceRepo")
-	private ServiceRepository serviceRepo;
+	private ConfigurationRepository configRepo;
 		
 	@RequestMapping("/merhaba")
     public void merhaba(Model model) {
@@ -34,48 +31,41 @@ public class AppRestController {
     }
 	
 	@PostMapping("/add")
-	public String addConfig(@RequestBody ServiceConfig serviceConfig) {
-		serviceRepo.save(serviceConfig);
+	public String addConfig(@RequestBody AppConfiguration serviceConfig) {
+		configRepo.save(serviceConfig);
 		return serviceConfig.toString();
 	}
 	
 	@RequestMapping("/get")
 	public String getValue(@RequestParam("name") String name) {	
 		
-		if (!serviceRepo.findByName(name).isEmpty() && serviceRepo.findByName(name).get(0) != null)
-			return serviceRepo.findByName(name).get(0).getValue();
+		if (!configRepo.findByName(name).isEmpty() && configRepo.findByName(name).get(0) != null)
+			return configRepo.findByName(name).get(0).getValue();
 		return "{'status':'error'}";
 	}
-	
-	@RequestMapping("/getType")
-	public String getType(@RequestParam("name") String name) {	
-		
-		ConfigurationReader<Integer> configReader = new ConfigurationReader<>("yeni");
-		return null;
-	}
-		
+			
 	@RequestMapping("/save")
 	public String saveData() {
 		// save a single Service
-		serviceRepo.save(new ServiceConfig("yeni", getFakeType(), "etiya.com", true, "applicationName"));
+		configRepo.save(new AppConfiguration("yeni", getFakeType(), "etiya.com", true, "applicationName"));
 		
 		// save a list of Services
-		serviceRepo.save(new ServiceConfig("yeni1", getFakeType(), "5", true, "applicationName1"));
-		serviceRepo.save(new ServiceConfig("yeni2", getFakeType(), "50", true, "applicationName2"));
-		serviceRepo.save(new ServiceConfig("yeni3", getFakeType(), "1", true, "applicationName3"));
-		serviceRepo.save(new ServiceConfig("yeni4", getFakeType(), "emre cetin", true, "applicationName4"));
+		configRepo.save(new AppConfiguration("yeni1", getFakeType(), "5", true, "applicationName1"));
+		configRepo.save(new AppConfiguration("yeni2", getFakeType(), "50", true, "applicationName2"));
+		configRepo.save(new AppConfiguration("yeni3", getFakeType(), "1", true, "applicationName3"));
+		configRepo.save(new AppConfiguration("yeni4", getFakeType(), "emre cetin", true, "applicationName4"));
 		return "Done";
 	}
 	
 	@RequestMapping("/findall")
-	public Collection<ServiceConfig> findAll() {
-		return serviceRepo.findAll();
+	public Collection<AppConfiguration> findAll() {
+		return configRepo.findAll();
 	}
 	
 	@GetMapping("/delete")
 	public String deleteConfig(@RequestParam("id") long id) {
 		try {
-			serviceRepo.deleteById(id);
+			configRepo.deleteById(id);
 			
 		}catch (EmptyResultDataAccessException e) {
 			e.printStackTrace();
@@ -89,7 +79,7 @@ public class AppRestController {
 	public String fetchDataByLastName(@RequestParam("name") String name){
 		StringBuilder bld = new StringBuilder();
 		
-		for(ServiceConfig s: serviceRepo.findByName(name)){
+		for(AppConfiguration s: configRepo.findByName(name)){
 			bld.append( s.toString() + "<br>"); 
 		}
 		
