@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +25,7 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "email")
+	@Column(name = "email", unique=true)
 	private String email;
 
 	@Column(name = "name")
@@ -39,6 +42,12 @@ public class User implements Serializable {
 
 	@Column(name = "userrole")
 	private BigDecimal userrole;
+	
+	@OneToMany(mappedBy = "creater", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Register> createrRegisters = new ArrayList<Register>();
+
+	@OneToMany(mappedBy = "updater", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Register> updaterRegisters = new ArrayList<Register>();
 
 	// bi-directional many-to-one association to Permtype
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -124,6 +133,22 @@ public class User implements Serializable {
 
 	public void setUserteam(UserTeam userteam) {
 		this.userteam = userteam;
+	}
+	
+	public List<Register> getCreaterRegisters() {
+		return createrRegisters;
+	}
+
+	public void setCreaterRegisters(List<Register> createrRegisters) {
+		this.createrRegisters = createrRegisters;
+	}
+
+	public List<Register> getUpdaterRegisters() {
+		return updaterRegisters;
+	}
+
+	public void setUpdaterRegisters(List<Register> updaterRegisters) {
+		this.updaterRegisters = updaterRegisters;
 	}
 
 	@Override

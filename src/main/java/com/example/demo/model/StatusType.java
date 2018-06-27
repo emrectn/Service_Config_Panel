@@ -19,7 +19,7 @@ public class StatusType implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "statusname")
+	@Column(name = "statusname", unique=true)
 	private String statusname;
 
 	public StatusType(Integer id, String statusname) {

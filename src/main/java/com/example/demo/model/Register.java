@@ -3,7 +3,6 @@ package com.example.demo.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,29 +32,32 @@ public class Register implements Serializable {
 	@Column(name = "jiratask")
 	private String jiratask;
 	
+	//@Temporal(value = TemporalType.TIMESTAMP) Tam zamanı istenirse
+	
 	@Temporal(TemporalType.DATE)
+	@Column(name="startdate", nullable=false)
 	private Date startdate;
 	
 	@Temporal(TemporalType.DATE)
+	@Column(name="finishdate")
 	private Date finishdate;
 	
 	@Column(name = "tag")
 	private String tag;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="cost_id")
+	@ManyToOne
+	@JoinColumn(name="cost_id", nullable=false)
 	private CostType costType;
 	
 	//bi-directional many-to-one association to User
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="create_user_id")
-	private User user1;
-	
+	@ManyToOne
+	@JoinColumn(name="create_user_id", nullable=false)
+	private User creater;
 
 	//bi-directional many-to-one association to User
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="update_user_id")
-	private User user2;
+	private User updater;
 
 	public Register() {
 		super();
@@ -140,27 +142,27 @@ public class Register implements Serializable {
 	public void setCostType(CostType costType) {
 		this.costType = costType;
 	}
-
-
-	public User getUser1() {
-		return user1;
+	
+	
+	public User getCreater() {
+		return creater;
 	}
 
 
-	public void setUser1(User user1) {
-		this.user1 = user1;
+	public void setCreater(User creater) {
+		this.creater = creater;
 	}
 
 
-	public User getUser2() {
-		return user2;
+	public User getUpdater() {
+		return updater;
 	}
 
 
-	public void setUser2(User user2) {
-		this.user2 = user2;
+	public void setUpdater(User updater) {
+		this.updater = updater;
 	}
-		
+
 
 	@Override
 	public String toString() {
