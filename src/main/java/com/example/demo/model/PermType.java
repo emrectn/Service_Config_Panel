@@ -28,9 +28,12 @@ public class PermType implements Serializable {
 	@OneToMany(mappedBy = "permtype", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<User> user = new ArrayList<User>();
 	
-	public PermType(Integer id, String permname) {
+	public PermType() {
 		super();
-		this.id = id;
+	}
+
+	public PermType(String permname) {
+		super();
 		this.permname = permname;
 	}
 

@@ -22,9 +22,12 @@ public class StatusType implements Serializable {
 	@Column(name = "statusname", unique=true)
 	private String statusname;
 
-	public StatusType(Integer id, String statusname) {
+	public StatusType() {
 		super();
-		this.id = id;
+	}
+
+	public StatusType(String statusname) {
+		super();
 		this.statusname = statusname;
 	}
 

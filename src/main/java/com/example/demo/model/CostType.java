@@ -29,9 +29,12 @@ public class CostType implements Serializable {
 	@OneToMany(mappedBy = "costType", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Register> registers = new ArrayList<Register>();
 
-	public CostType(Integer id, String costname) {
+	public CostType(){
+		
+	}
+	
+	public CostType(String costname) {
 		super();
-		this.id = id;
 		this.costname = costname;
 	}
 

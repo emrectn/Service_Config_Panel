@@ -29,9 +29,13 @@ public class UserTeam implements Serializable {
 	@OneToMany(mappedBy = "userteam", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<User> user = new ArrayList<User>();
 
-	public UserTeam(Integer id, String teamname) {
+	
+	public UserTeam() {
 		super();
-		this.id = id;
+	}
+
+	public UserTeam(String teamname) {
+		super();
 		this.teamname = teamname;
 	}
 
