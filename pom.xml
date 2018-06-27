@@ -67,7 +67,19 @@
 			<version>2.3.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.5.1-Final</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<!-- version 1.5.8 is the latest version that will work with the slf4j-api 
+				that's currently bundled with hibernate-parent -->
+			<version>1.5.8</version>
+		</dependency>
 	</dependencies>
 
 	<build>

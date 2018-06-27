@@ -23,12 +23,6 @@ public class AppRestController {
 	
 	@Autowired
 	private ConfigurationRepository configRepo;
-		
-	@RequestMapping("/merhaba")
-    public void merhaba(Model model) {
-        String mesajicerigi="Merhaba Dünya";
-        model.addAttribute("mesaj", mesajicerigi);
-    }
 	
 	@PostMapping("/add")
 	public String addConfig(@RequestBody AppConfiguration serviceConfig) {

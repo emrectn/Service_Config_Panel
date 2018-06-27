@@ -7,12 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.AppConfiguration;
 
-@Repository
+@Repository("configurationRepository")
 public interface ConfigurationRepository extends JpaRepository<AppConfiguration, Long> {
 	
 	List<AppConfiguration> findByName(String name);
 	
 	void deleteById(Long id);
 	
-	AppConfiguration findByNameAndIsActive(String name, Boolean isActive);
+	AppConfiguration findByNameAndIsActiveIsTrue(String name);
 }
