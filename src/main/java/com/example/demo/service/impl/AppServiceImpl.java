@@ -17,5 +17,6 @@ public class AppServiceImpl implements AppService {
 		configurationRepository.deleteAll();
 		System.out.println("SAVED ALL DATA");
 	}
+	
 
 }

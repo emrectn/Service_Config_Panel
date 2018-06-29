@@ -13,8 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 @Table(name="costtypes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CostType implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -27,6 +33,7 @@ public class CostType implements Serializable {
 	private String costname;
 	
 	@OneToMany(mappedBy = "costType", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private List<Register> registers = new ArrayList<Register>();
 
 	public CostType(){
@@ -53,7 +60,8 @@ public class CostType implements Serializable {
 	public void setCostname(String costname) {
 		this.costname = costname;
 	}
-
+	
+	@JsonIgnore
 	public List<Register> getRegisters() {
 		return registers;
 	}

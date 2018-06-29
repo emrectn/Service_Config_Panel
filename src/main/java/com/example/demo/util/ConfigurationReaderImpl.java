@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.exception.DemoAppException;
+import com.example.demo.exception.AppException;
 import com.example.demo.model.AppConfiguration;
 import com.example.demo.repository.ConfigurationRepository;
 
@@ -18,7 +18,7 @@ public class ConfigurationReaderImpl implements ConfigurationReader{
 	public <T> T getValue(String name) {
 		
 		if (name == null || name.equals("")) {
-			throw new DemoAppException("Name can not be null or empty!");
+			throw new AppException("Name can not be null or empty!");
 		}
 		
 		try {
@@ -35,10 +35,10 @@ public class ConfigurationReaderImpl implements ConfigurationReader{
 					return null;
 				}
 			} else {
-				throw new DemoAppException("The value " + name + "not found!");
+				throw new AppException("The value " + name + "not found!");
 			}
 		} catch (Exception e) {
-			throw new DemoAppException("Invalid argument by name : " + name, e);
+			throw new AppException("Invalid argument by name : " + name, e);
 		}
 	}
 

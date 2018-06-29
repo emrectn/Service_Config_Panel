@@ -52,8 +52,7 @@ public class MainApplicationTests {
 	@Autowired
 	private RegisterRepository registerRepo;
 	
-	
-	
+
 	@Test
 	public void add_costType() {
 		System.out.println("Test add_costType");

@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -44,19 +47,23 @@ public class User implements Serializable {
 	private BigDecimal userrole;
 	
 	@OneToMany(mappedBy = "creater", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private List<Register> createrRegisters = new ArrayList<Register>();
 
 	@OneToMany(mappedBy = "updater", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private List<Register> updaterRegisters = new ArrayList<Register>();
 
 	// bi-directional many-to-one association to Permtype
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "perm_type_id")
+	@JsonBackReference
 	private PermType permtype;
 
 	// bi-directional many-to-one association to Userteam
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "team_id")
+	@JsonBackReference
 	private UserTeam userteam;
 
 	public User() {

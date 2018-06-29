@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="registers")
 public class Register implements Serializable {
@@ -45,6 +47,7 @@ public class Register implements Serializable {
 	@Column(name = "tag")
 	private String tag;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="cost_id", nullable=false)
 	private CostType costType;
@@ -52,11 +55,13 @@ public class Register implements Serializable {
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="create_user_id", nullable=false)
+	@JsonBackReference
 	private User creater;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="update_user_id")
+	@JsonBackReference
 	private User updater;
 
 	public Register() {
