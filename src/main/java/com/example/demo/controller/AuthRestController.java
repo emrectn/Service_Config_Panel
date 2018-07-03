@@ -16,7 +16,8 @@ public class AuthRestController {
 	@GetMapping("/app/api/auth/login")
 	public @ResponseBody String login(Authentication  authentication) {
 		String msg = "";
-		logger.debug("GetAut : "+authentication.getAuthorities());
+		System.out.println("--" + authentication.getAuthorities());
+		logger.error("GetAut : "+authentication.getAuthorities());
 		for (GrantedAuthority authority : authentication.getAuthorities()) {
 		     String role = authority.getAuthority();
                     msg += authentication.getName()+", You have "+ role;

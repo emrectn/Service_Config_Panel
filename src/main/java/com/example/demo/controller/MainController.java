@@ -2,13 +2,15 @@ package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
 
 	@RequestMapping("/")
-	public String sayHello() {
-		return "index";
+	public ModelAndView index() {
+		ModelAndView model = new ModelAndView("index");
+		return model;
 	}
 
 	@RequestMapping("/login")
@@ -17,10 +19,12 @@ public class MainController {
 	}
 
 	@RequestMapping("/register")
-	public String register() {
-		return "register";
+	public ModelAndView register() {
+		ModelAndView model = new ModelAndView("register");
+		model.addObject("msg", "oldu mpu kardeş?");
+		return model;
 	}
-	
+
 	@RequestMapping("/search")
 	public String search() {
 		return "search";
