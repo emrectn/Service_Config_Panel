@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,9 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -27,17 +32,21 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	
 	@Column(name = "email", unique=true)
+	@Email(message = "*Please provide a valid Email")
+	@NotEmpty(message = "*Please provide an email")
 	private String email;
 
 	@Column(name = "name")
+	@NotEmpty(message = "*Please provide your name")
 	private String name;
 
 	@Column(name = "password")
 	private String password;
 
 	@Column(name = "surname")
+	@NotEmpty(message = "*Please provide your last name")
 	private String surname;
 
 	@Column(name = "userlog")
@@ -65,6 +74,28 @@ public class User implements Serializable {
 	@JoinColumn(name = "team_id")
 	@JsonBackReference
 	private UserTeam userteam;
+	
+	@Column(name = "active")
+	private int active;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles;
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 	public User() {
 		super();

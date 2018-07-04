@@ -55,16 +55,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.exceptionHandling()
 			.accessDeniedPage("/app/error");
 	}
-	
-	@Autowired
-	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery("select * from users where email=?")
-		.authoritiesByUsernameQuery("select * from permtypes where permname=?");
-				
-	}
-	
-	
+		
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
 

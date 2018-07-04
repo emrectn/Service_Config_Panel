@@ -1,5 +1,5 @@
 <div th:fragment="login-form" class="container">
-	<form class="form-signin" action="/login" method="POST">
+	<form autocomplete="off" class="form-signin" action="/login" method="POST">
 	
         <h2 class="form-signin-heading">Please sign in</h2>
 		<div th:if="${param.error}" class="alert alert-danger">
