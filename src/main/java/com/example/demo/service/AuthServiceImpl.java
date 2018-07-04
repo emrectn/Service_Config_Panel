@@ -22,7 +22,7 @@ public class AuthServiceImpl implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		com.example.demo.model.User activeUser = userService.findByEmail(email);		
+		com.example.demo.model.User activeUser = userService.findUserByEmail(email);		
 		GrantedAuthority authority = new SimpleGrantedAuthority(activeUser.getPermtype().getPermname());
 		UserDetails userDetails = (UserDetails) new User(activeUser.getEmail(), activeUser.getPassword(), Arrays.asList(authority));
 		return userDetails;

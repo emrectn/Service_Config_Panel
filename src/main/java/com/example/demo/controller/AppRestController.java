@@ -30,11 +30,6 @@ public class AppRestController {
 		return serviceConfig.toString();
 	}
 	
-	@PostMapping("/login")
-	public String saylogin() {
-		System.out.println("Giriş Yaptın");
-		return null;
-	}
 	
 	@PostMapping("/logout")
 	public String saylogout() {

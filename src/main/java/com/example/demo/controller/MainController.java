@@ -13,11 +13,6 @@ public class MainController {
 		return model;
 	}
 
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-
 	@RequestMapping("/register")
 	public ModelAndView register() {
 		ModelAndView model = new ModelAndView("register");

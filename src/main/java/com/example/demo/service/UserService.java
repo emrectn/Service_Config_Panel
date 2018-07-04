@@ -8,13 +8,14 @@ import com.example.demo.model.User;
 
 public interface UserService {
 	
-	User findByEmailAndPassword(String email, String password);
+	public User findUserByEmailAndPassword(String email, String password);
 	
-	User findByEmail(String email);
+	public User findUserByEmail(String email);
 	
-	List<User> findAll();
+	public List<User> findAll();
 	
-	UserDetails loadUserByUsername(String username, String password);
+	public UserDetails loadUserByUsername(String username, String password);
 	
-
+	public void saveUser(User user);
+	
 }

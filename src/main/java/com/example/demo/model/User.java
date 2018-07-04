@@ -34,7 +34,6 @@ public class User implements Serializable {
 	private Integer id;
 	
 	@Column(name = "email", unique=true)
-	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
 	private String email;
 
