@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ public class AuthRestController {
 		String msg = "";
 		System.out.println("--" + authentication.getAuthorities());
 		logger.error("GetAut : "+authentication.getAuthorities());
+		
 		for (GrantedAuthority authority : authentication.getAuthorities()) {
 		     String role = authority.getAuthority();
                     msg += authentication.getName()+", You have "+ role;
@@ -58,8 +60,8 @@ public class AuthRestController {
 		return modelAndView;
 	}
 	
-	@PostMapping("/registration")
-	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+	@PostMapping("/app/api/auth/registration")
+	public ModelAndView createNewUser(@NotNull User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
@@ -73,7 +75,7 @@ public class AuthRestController {
 			userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
-			modelAndView.setViewName("registration");
+			modelAndView.setViewName("login");
 			
 		}
 		return modelAndView;

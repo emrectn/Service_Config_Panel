@@ -20,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.exception.CustomErrorType;
 import com.example.demo.model.PermType;
-import com.example.demo.model.UserTeam;
 import com.example.demo.service.PermTypeService;
 
 @RestController

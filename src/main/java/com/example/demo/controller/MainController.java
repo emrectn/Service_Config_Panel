@@ -17,6 +17,7 @@ public class MainController {
 		logger.error("GetAut : "+authentication.getName());
 		logger.error("GetRole : "+authentication.getAuthorities());
 		ModelAndView model = new ModelAndView("index");
+		model.addObject("name", authentication.getName());
 		return model;
 	}
 
@@ -30,6 +31,11 @@ public class MainController {
 	@RequestMapping("/search")
 	public String search() {
 		return "search";
+	}
+	
+	@RequestMapping("/admin")
+	public String admin() {
+		return "admün";
 	}
 
 }

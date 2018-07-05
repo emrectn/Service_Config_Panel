@@ -59,13 +59,11 @@ public class Register implements Serializable {
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="create_user_id", nullable=false)
-	@JsonBackReference
 	private User creater;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="update_user_id")
-	@JsonBackReference
 	private User updater;
 
 	public Register() {

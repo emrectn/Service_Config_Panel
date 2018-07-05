@@ -21,7 +21,7 @@ var app = new Vue({
         }
 	});
 	
-	app_menu = new Vue({
+var	app_menu = new Vue({
 	    'el': '#app-menu',
 	    'data': {
 	        'selected': ''

@@ -20,7 +20,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.example.demo.model.serialize.CustomRegisterSerializer;
+import com.example.demo.model.serialize.CustomUserSerializer;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "users")
@@ -53,11 +56,11 @@ public class User implements Serializable {
 	private BigDecimal userrole;
 	
 	@OneToMany(mappedBy = "creater", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonManagedReference
+	@JsonSerialize(using = CustomRegisterSerializer.class)
 	private List<Register> createrRegisters = new ArrayList<>();
 
 	@OneToMany(mappedBy = "updater", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonManagedReference
+	@JsonSerialize(using = CustomRegisterSerializer.class)
 	private List<Register> updaterRegisters = new ArrayList<>();
 
 	// bi-directional many-to-one association to Permtype
@@ -71,11 +74,14 @@ public class User implements Serializable {
 	private UserTeam userteam;
 	
 	@Column(name = "active")
-	private int active;
+	private int active=1;
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
-
+	
+	
+	
 	public int getActive() {
 		return active;
 	}
