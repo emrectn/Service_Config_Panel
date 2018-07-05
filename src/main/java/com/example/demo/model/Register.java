@@ -15,9 +15,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="registers")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 public class Register implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -47,7 +52,6 @@ public class Register implements Serializable {
 	@Column(name = "tag")
 	private String tag;
 	
-	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="cost_id", nullable=false)
 	private CostType costType;

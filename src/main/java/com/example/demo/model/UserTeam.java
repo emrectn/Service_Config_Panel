@@ -13,9 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.example.demo.model.serialize.CustomUserSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 @Entity
@@ -32,8 +33,8 @@ public class UserTeam implements Serializable {
 	private String teamname;
 	
 	@OneToMany(mappedBy = "userteam", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonManagedReference
-	private List<User> user = new ArrayList<User>();
+	@JsonSerialize(using = CustomUserSerializer.class)
+	private List<User> user = new ArrayList<>();
 
 	
 	public UserTeam() {
@@ -60,7 +61,6 @@ public class UserTeam implements Serializable {
 	public void setTeamname(String teamname) {
 		this.teamname = teamname;
 	}
-	
 	@JsonIgnore
 	public List<User> getUser() {
 		return user;

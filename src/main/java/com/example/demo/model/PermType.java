@@ -13,9 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.demo.model.serialize.CustomUserSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name="permtypes")
@@ -31,8 +31,8 @@ public class PermType implements Serializable {
 	private String permname;
 	
 	@OneToMany(mappedBy = "permtype", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonManagedReference
-	private List<User> user = new ArrayList<User>();
+	@JsonSerialize(using = CustomUserSerializer.class)
+	private List<User> user = new ArrayList<>();
 	
 	public PermType() {
 		super();
@@ -59,11 +59,10 @@ public class PermType implements Serializable {
 		this.permname = permname;
 	}
 	
-	@JsonIgnore
 	public List<User> getUser() {
 		return user;
 	}
-
+	
 	public void setUser(List<User> user) {
 		this.user = user;
 	}

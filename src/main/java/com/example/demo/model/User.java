@@ -18,10 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -56,22 +54,20 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy = "creater", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
-	private List<Register> createrRegisters = new ArrayList<Register>();
+	private List<Register> createrRegisters = new ArrayList<>();
 
 	@OneToMany(mappedBy = "updater", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
-	private List<Register> updaterRegisters = new ArrayList<Register>();
+	private List<Register> updaterRegisters = new ArrayList<>();
 
 	// bi-directional many-to-one association to Permtype
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "perm_type_id")
-	@JsonBackReference
 	private PermType permtype;
 
 	// bi-directional many-to-one association to Userteam
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "team_id")
-	@JsonBackReference
 	private UserTeam userteam;
 	
 	@Column(name = "active")

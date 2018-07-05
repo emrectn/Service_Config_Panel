@@ -13,9 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.demo.model.serialize.CustomRegisterSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
@@ -33,11 +32,15 @@ public class CostType implements Serializable {
 	private String costname;
 	
 	@OneToMany(mappedBy = "costType", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonManagedReference
-	private List<Register> registers = new ArrayList<Register>();
+	@JsonSerialize(using = CustomRegisterSerializer.class)
+	private List<Register> registers = new ArrayList<>();
 
-	public CostType(){
-		
+	public CostType(){}
+	
+	public CostType(String costname, List<Register> registers) {
+		super();
+		this.costname = costname;
+		this.registers = registers;
 	}
 	
 	public CostType(String costname) {
@@ -60,8 +63,7 @@ public class CostType implements Serializable {
 	public void setCostname(String costname) {
 		this.costname = costname;
 	}
-	
-	@JsonIgnore
+
 	public List<Register> getRegisters() {
 		return registers;
 	}

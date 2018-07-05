@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.demo.controller.CostTypeController;
@@ -25,8 +26,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	public static final Logger logger = LoggerFactory.getLogger(CostTypeController.class);
 
-//	@Autowired
-//	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
     private DataSource dataSource;
@@ -37,20 +38,20 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
 	
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth)
-//			throws Exception {
-//		auth.
-//			jdbcAuthentication()
-//				.usersByUsernameQuery(usersQuery)
-//				.authoritiesByUsernameQuery(rolesQuery)
-//				.dataSource(dataSource)
-//				.passwordEncoder(bCryptPasswordEncoder);
-//	}
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth)
+			throws Exception {
+		auth.
+			jdbcAuthentication()
+				.usersByUsernameQuery(usersQuery)
+				.authoritiesByUsernameQuery(rolesQuery)
+				.dataSource(dataSource)
+				.passwordEncoder(bCryptPasswordEncoder);
+	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().
+		http.
 		authorizeRequests()
 			.antMatchers("/login").permitAll()
 			.antMatchers("/registration").permitAll()
@@ -58,20 +59,20 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.authenticated().and().csrf().disable().formLogin()
 			.loginPage("/login").failureUrl("/login?error=true")
 			.defaultSuccessUrl("/")
-			.usernameParameter("username")
+			.usernameParameter("email")
 			.passwordParameter("password")
 			.and().logout()
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/login").and().exceptionHandling()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/app/api/auth/logout"))
+			.logoutSuccessUrl("/").and().exceptionHandling()
 			.accessDeniedPage("/access-denied");
 }
 		
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
 
-        authenticationMgr.inMemoryAuthentication().withUser("a").password("{noop}a")
-            .authorities("ROLE_USER").and().withUser("b").password("{noop}b")
-            .authorities("ROLE_USER", "ROLE_ADMIN");
+        authenticationMgr.inMemoryAuthentication()
+        	.withUser("a").password("{noop}a").authorities("USER")
+        	.and().withUser("b").password("{noop}b").authorities("ADMIN","USER");
     }
     
 	@Override

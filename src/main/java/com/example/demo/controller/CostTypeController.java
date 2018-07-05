@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -13,20 +12,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.exception.CustomErrorType;
 import com.example.demo.model.CostType;
 import com.example.demo.service.CostTypeService;
-
-import javassist.NotFoundException;
 
 @RestController
 public class CostTypeController {
@@ -80,7 +75,7 @@ public class CostTypeController {
 		costTypeService.save(costType);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/app/api/costtype/{id}").buildAndExpand(costType.getId()).toUri());
-		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 		
 	}
 	
