@@ -35,7 +35,10 @@ public class UserTeam implements Serializable {
 	@OneToMany(mappedBy = "userteam", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonSerialize(using = CustomUserSerializer.class)
 	private List<User> user = new ArrayList<>();
-
+	
+	@OneToMany(mappedBy = "registerUserteam", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonSerialize(using = CustomUserSerializer.class)
+	private List<Register> registerUser = new ArrayList<>();
 	
 	public UserTeam() {
 		super();
@@ -69,12 +72,21 @@ public class UserTeam implements Serializable {
 	public void setUser(List<User> user) {
 		this.user = user;
 	}
+	
+
+	public List<Register> getRegisterUser() {
+		return registerUser;
+	}
+
+	public void setRegisterUser(List<Register> registerUser) {
+		this.registerUser = registerUser;
+	}
 
 	@Override
 	public String toString() {
-		return "UserTeam [id=" + id + ", teamname=" + teamname + "]";
+		return "UserTeam [id=" + id + ", teamname=" + teamname + ", user=" + user + ", registerUser=" + registerUser
+				+ "]";
 	}
-	
-	
+
 
 }

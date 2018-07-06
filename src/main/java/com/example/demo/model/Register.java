@@ -3,6 +3,7 @@ package com.example.demo.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -38,6 +38,15 @@ public class Register implements Serializable {
 
 	@Column(name = "jiratask")
 	private String jiratask;
+	
+	@Column(name = "springt")
+	private Integer springt;
+	
+	@Column(name = "hour")
+	private Integer hour;
+	
+	@Column(name = "defination")
+	private String defination;
 	
 	//@Temporal(value = TemporalType.TIMESTAMP) Tam zamanı istenirse
 	
@@ -65,6 +74,11 @@ public class Register implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="update_user_id")
 	private User updater;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "team_id")
+	private UserTeam registerUserteam;
+	
 
 	public Register() {
 		super();
@@ -168,6 +182,18 @@ public class Register implements Serializable {
 
 	public void setUpdater(User updater) {
 		this.updater = updater;
+	}
+	
+	
+
+
+	public UserTeam getRegisterUserteam() {
+		return registerUserteam;
+	}
+
+
+	public void setRegisterUserteam(UserTeam registerUserteam) {
+		this.registerUserteam = registerUserteam;
 	}
 
 

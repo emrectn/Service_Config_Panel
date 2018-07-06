@@ -21,8 +21,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import com.example.demo.model.serialize.CustomRegisterSerializer;
-import com.example.demo.model.serialize.CustomUserSerializer;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
@@ -189,6 +187,7 @@ public class User implements Serializable {
 	public void setUpdaterRegisters(List<Register> updaterRegisters) {
 		this.updaterRegisters = updaterRegisters;
 	}
+	
 
 	@Override
 	public String toString() {
