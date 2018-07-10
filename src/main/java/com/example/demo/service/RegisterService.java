@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.model.Register;
+import com.example.demo.model.User;
 
 public interface RegisterService {
 	
@@ -10,6 +11,6 @@ public interface RegisterService {
 	
 	Register findById(Integer id);
 	
-	List<Register> findByTeamId(Integer id);
+	List<Register> findByTeamId(User user);
 	
 }

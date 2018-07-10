@@ -1,0 +1,6 @@
+.text-limit {
+	max-width: 37px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

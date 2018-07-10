@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Register;
+import com.example.demo.model.User;
 import com.example.demo.repository.RegisterRepository;
 import com.example.demo.service.RegisterService;
 
@@ -26,8 +27,8 @@ public class RegisterServiceImpl implements RegisterService{
 	}
 
 	@Override
-	public List<Register> findByTeamId(Integer id) {
-		return null;
+	public List<Register> findByTeamId(User user) {
+		return registerRepository.findByRegisterUserteam(user.getUserteam());
 	}
 
 }

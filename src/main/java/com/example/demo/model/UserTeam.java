@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.example.demo.model.serialize.CustomRegisterSerializer;
 import com.example.demo.model.serialize.CustomUserSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,7 +38,7 @@ public class UserTeam implements Serializable {
 	private List<User> user = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "registerUserteam", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonSerialize(using = CustomUserSerializer.class)
+	@JsonSerialize(using = CustomRegisterSerializer.class)
 	private List<Register> registerUser = new ArrayList<>();
 	
 	public UserTeam() {
@@ -64,7 +65,7 @@ public class UserTeam implements Serializable {
 	public void setTeamname(String teamname) {
 		this.teamname = teamname;
 	}
-	@JsonIgnore
+	
 	public List<User> getUser() {
 		return user;
 	}
@@ -72,7 +73,6 @@ public class UserTeam implements Serializable {
 	public void setUser(List<User> user) {
 		this.user = user;
 	}
-	
 
 	public List<Register> getRegisterUser() {
 		return registerUser;

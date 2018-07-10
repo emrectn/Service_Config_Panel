@@ -184,8 +184,6 @@ public class Register implements Serializable {
 		this.updater = updater;
 	}
 	
-	
-
 
 	public UserTeam getRegisterUserteam() {
 		return registerUserteam;
@@ -194,6 +192,36 @@ public class Register implements Serializable {
 
 	public void setRegisterUserteam(UserTeam registerUserteam) {
 		this.registerUserteam = registerUserteam;
+	}
+
+
+	public Integer getSpringt() {
+		return springt;
+	}
+
+
+	public void setSpringt(Integer springt) {
+		this.springt = springt;
+	}
+
+
+	public Integer getHour() {
+		return hour;
+	}
+
+
+	public void setHour(Integer hour) {
+		this.hour = hour;
+	}
+
+
+	public String getDefination() {
+		return defination;
+	}
+
+
+	public void setDefination(String defination) {
+		this.defination = defination;
 	}
 
 

@@ -3,6 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 	<head th:replace="fragments/header :: header('Blog index')" />
+	<link rel="stylesheet" th:href="@{/css/index.css}" />
 </head>
 <body>
 	<div id="app-menu">
@@ -17,29 +18,35 @@
 		    <thead>
 		      <tr>
 		        <th>ID</th>
-		        <th>TEAM</th>
+		        <th>TAG</th>
+		        <th>CFP</th>
 		        <th>FT_ID</th>
-		        <th>JIRA TASK</th>
+		        <th>JIRA_TASK</th>
 		        <th>CREATER</th>
 		        <th>UPDATER</th>
-		        <th>CFP</th>
+		        <th>COST_TYPE</th>
+		        <th>DEFINATION</th>
 		        <th>HOUR</th>
-		        <th>COST TYPE</th>
 		        <th>SPRINT</th>
-		        <th>STATUS</th>
-		        <th>MANAGER</th>
-		        <th>NOTE</th>
-		        <th>EXPLANATION</th>
+		        <th>TEAM</th>
+		        <th>TEAM</th>
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr v-for="config in configs">
-		        <td>{{config.id}}</td>
-		        <td>{{config.name}}</td>
-		        <td>{{config.type}}</td>
-		        <td>{{config.value}}</td>
-		        <td>{{config.isIsActive}}</td>
-		        <td>{{config.applicationName}}</td>
+		      <tr th:each="register : ${registers}">
+		        <td th:text="${register.id}">ID</td>
+		        <td th:text="${register.tag}">TAG</td>
+		        <td th:text="${register.cfp}">CFP</td>
+		        <td th:text="${register.ftid}">FTID</td>
+		        <td th:text="${register.jiratask}">JIRA</td>
+		        <td th:text="${register.creater.getName()}">CREA</td>
+		        <td th:text="${register.updater.getName()}">UPD</td>
+		        <td th:text="${register.costType.getCostname()}">ctype</td>
+		        <td class="text-limit" th:text="${register.defination}">QQQ</td>
+		        <td th:text="${register.hour}">HOUR</td>
+		        <td th:text="${register.springt}">springt</td>
+		        <td th:text="${register.registerUserteam.getTeamname()}">TEAM</td>
+		        <td>ANALİZ</td>
 		      </tr>
 		    </tbody>
 		  </table>
