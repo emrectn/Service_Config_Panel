@@ -21,10 +21,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import com.example.demo.model.serialize.CustomRegisterSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 

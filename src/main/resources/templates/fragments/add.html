@@ -1,6 +1,6 @@
 <div th:fragment="main-form" class="container">
 	<h2>Add New Task</h2>
-	<form class="form-horizontal" action="/action_page.php">
+	<form class="form-horizontal" th:action="@{/app/api/register}" method="post">
 
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="name">TAG:</label>
@@ -74,7 +74,7 @@
 			<div class="col-sm-3">
 				<select v-model="selected_status">
 				  <option disabled value="">Please Select Status</option>
-				  <option v-for="tname in status" v-bind:value="tname.id">{{tname.teamname | Upper}}</option>
+				  <option v-for="stype in status_types" v-bind:value="stype.id">{{stype.statusname | Upper}}</option>
 				</select>
 			</div>
 		</div>

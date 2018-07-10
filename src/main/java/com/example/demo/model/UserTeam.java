@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 import com.example.demo.model.serialize.CustomRegisterSerializer;
 import com.example.demo.model.serialize.CustomUserSerializer;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 

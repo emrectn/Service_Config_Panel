@@ -12,5 +12,7 @@ public interface RegisterService {
 	Register findById(Integer id);
 	
 	List<Register> findByTeamId(User user);
+
+	void save(Register register);
 	
 }

@@ -4,9 +4,9 @@
       <a class="navbar-brand" href="#">Task Manager</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a v-on:click='home_onclick()'>List</a></li>
-      <li><a v-on:click='add_onclick()'>Add</a></li>
-      <li><a v-on:click='delete_onclick()'>Delete</a></li>
+      <li><a href="#" v-on:click='home_onclick()'>List</a></li>
+      <li><a href="#" v-on:click='add_onclick()'>New Task</a></li>
+      <li><a href="#" v-on:click='delete_onclick()'>Delete Task</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#" th:text="'User : ' + ${name}" >Username</a></li>

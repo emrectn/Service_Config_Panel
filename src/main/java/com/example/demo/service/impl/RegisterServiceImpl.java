@@ -31,4 +31,10 @@ public class RegisterServiceImpl implements RegisterService{
 		return registerRepository.findByRegisterUserteam(user.getUserteam());
 	}
 
+	@Override
+	public void save(Register register) {
+		registerRepository.save(register);
+		
+	}
+
 }

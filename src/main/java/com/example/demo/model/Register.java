@@ -79,41 +79,38 @@ public class Register implements Serializable {
 	@JoinColumn(name = "team_id")
 	private UserTeam registerUserteam;
 	
+	@ManyToOne
+	@JoinColumn(name="status_id")
+	private StatusType statusType;
+	
 
 	public Register() {
 		super();
 	}
 
-
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
 	public String getCfp() {
 		return cfp;
 	}
-
 
 	public void setCfp(String cfp) {
 		this.cfp = cfp;
 	}
 
-
 	public String getFtid() {
 		return ftid;
 	}
 
-
 	public void setFtid(String ftid) {
 		this.ftid = ftid;
 	}
-
 
 	public String getJiratask() {
 		return jiratask;
@@ -128,7 +125,6 @@ public class Register implements Serializable {
 	public Date getStartdate() {
 		return startdate;
 	}
-
 
 	public void setStartdate(Date startdate) {
 		this.startdate = startdate;
@@ -222,6 +218,16 @@ public class Register implements Serializable {
 
 	public void setDefination(String defination) {
 		this.defination = defination;
+	}
+	
+
+	public StatusType getStatusType() {
+		return statusType;
+	}
+
+
+	public void setStatusType(StatusType statusType) {
+		this.statusType = statusType;
 	}
 
 

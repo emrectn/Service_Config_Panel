@@ -5,7 +5,7 @@ var app_menu = new Vue({
         'selected': ''
     },
     'created': function () {
-        axios.get("/save"); 
+        console.log("Navbar Geldi");
     },
     'methods': {
         'home_onclick': function() {
@@ -37,7 +37,7 @@ var app = new Vue({
         'selected_hour': '',
         'cost_types': [],
         'team_names': [],
-        'status': [],
+        'status_types': [],
     },
 
     created: function () {
@@ -48,27 +48,35 @@ var app = new Vue({
         this.fetchConfigs();
         this.fetchCostTypes();
         this.fetchTeamNames();
+        this.fetchStatusTypes();
     },
     methods: {
         fetchConfigs(){
             console.log("Hosgeldin Sahip");
         },
+
         deleteConfig(){
             id = document.getElementById('id').value;
             console.log(id);
             axios.get("/delete?id="+id);
         },
+
         fetchCostTypes() {
             axios.get("/app/api/costtype").then(function(response){
-                console.log(response.data);
                 this.cost_types = response.data;
             }.bind(this));
         },
-       fetchTeamNames() {
+
+        fetchTeamNames() {
         axios.get("/app/api/userteam").then(function(response){
-            console.log(response.data);
             this.team_names = response.data;
         }.bind(this));
+       },
+
+       fetchStatusTypes() {
+            axios.get("/app/api/statustype").then(function(response){
+                this.status_types = response.data;
+            }.bind(this));
        }
     },
 
