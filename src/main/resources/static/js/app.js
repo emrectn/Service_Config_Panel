@@ -1,36 +1,8 @@
- 
-var app_menu = new Vue({
-    'el': '#app-menu',
-    'data': {
-        'selected': ''
-    },
-    'created': function () {
-        console.log("Navbar Geldi");
-    },
-    'methods': {
-        'home_onclick': function() {
-            app.selected = 'home';
-            app.fetchConfigs();
-            console.log('home');
-        },
-        'add_onclick': function() {
-
-            app.selected = 'add';
-            console.log('add');
-
-        },
-        'delete_onclick': function() {
-            app.selected = 'delete';
-            console.log('delete');
-        },
-    }
-});
-
 var app = new Vue({
     el: '#app',
     data: {
         'configs': [],
-        'selected': 'add',
+        'selected': 'home',
         'selected_costtype': '',
         'selected_teamname': '',
         'selected_status': '',
@@ -38,6 +10,8 @@ var app = new Vue({
         'cost_types': [],
         'team_names': [],
         'status_types': [],
+        'a': '',
+        'upHere': false
     },
 
     created: function () {
@@ -68,16 +42,27 @@ var app = new Vue({
         },
 
         fetchTeamNames() {
-        axios.get("/app/api/userteam").then(function(response){
-            this.team_names = response.data;
-        }.bind(this));
+            axios.get("/app/api/userteam").then(function(response){
+                this.team_names = response.data;
+            }.bind(this));
        },
 
        fetchStatusTypes() {
             axios.get("/app/api/statustype").then(function(response){
                 this.status_types = response.data;
             }.bind(this));
-       }
+       },
+
+       snackBarShow(a) {
+            var x = document.getElementById("snackbar");
+            	x.textContent = a ;
+
+                // Add the "show" class to DIV
+                x.className = "show";
+
+                // After 3 seconds, remove the show class from DIV
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 4000);
+       },
     },
 
     filters: {

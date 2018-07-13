@@ -14,5 +14,4 @@ public interface RegisterService {
 	List<Register> findByTeamId(User user);
 
 	void save(Register register);
-	
 }

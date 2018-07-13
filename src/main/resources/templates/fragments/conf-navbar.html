@@ -1,12 +1,10 @@
-<nav th:fragment="navbar" class="navbar navbar-inverse">
+<nav th:fragment="conf-navbar" class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Task Manager</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#" v-on:click='home_onclick()'>List</a></li>
-      <li><a href="#" v-on:click='add_onclick()'>New Task</a></li>
-      <li><a href="#" v-on:click='delete_onclick()'>Delete Task</a></li>
+      <li><a href="/" v-on:click='home_onclick()'>List</a></li>
       <li><a href="/configure">Configure</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

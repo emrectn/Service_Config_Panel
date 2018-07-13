@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.User;
+import com.example.demo.service.CostTypeService;
+import com.example.demo.service.PermTypeService;
 import com.example.demo.service.RegisterService;
+import com.example.demo.service.StatusTypeService;
 import com.example.demo.service.UserService;
+import com.example.demo.service.UserTeamService;
 
 @Controller
 public class MainController {
@@ -22,6 +26,18 @@ public class MainController {
 	
 	@Autowired
 	private RegisterService registerService;
+
+	@Autowired
+	private UserTeamService userTeamService;
+
+	@Autowired
+	private CostTypeService costTypeService;
+
+	@Autowired
+	private PermTypeService permTypeService;
+	
+	@Autowired
+	private StatusTypeService statusTypeService;
 	
 	@RequestMapping("/")
 	public ModelAndView index(Authentication authentication) {
@@ -49,6 +65,19 @@ public class MainController {
 	@RequestMapping("/admin")
 	public String admin() {
 		return "admün";
+	}
+	
+	@RequestMapping("/configure")
+	public ModelAndView configure(Authentication authentication) {
+		ModelAndView model = new ModelAndView("configure");
+		model.addObject("name", authentication.getName());
+		logger.error("costtypes : " + costTypeService.findAll());
+		logger.error("permtype : " + permTypeService.findAll());
+		logger.error("status : " + statusTypeService.findAll());
+		model.addObject("costtypes", costTypeService.findAll());
+		model.addObject("permtypes", permTypeService.findAll());
+		model.addObject("status", statusTypeService.findAll());
+		return model;
 	}
 
 }
