@@ -21,7 +21,9 @@
 						| Upper}}</option>
 				</select>
 			</div>
-			<a v-show="selected_config" class="btn btn-success" th:onclick="|app_config.showModal('', '')|" data-toggle="modal" data-target="#exampleModal"> New </a>
+			<a v-show="selected_config" class="btn btn-success"
+				th:onclick="|app_config.showModal('', '')|" data-toggle="modal"
+				data-target="#exampleModal"> New </a>
 		</div>
 
 		<table class="table table-striped">
@@ -38,30 +40,42 @@
 					th:each="ctype : ${costtypes}">
 					<td th:text="${ctype.id}">ID</td>
 					<td th:text="${ctype.costname}">NAME</td>
-					<td><a class="btn btn-primary" th:onclick="|app_config.showModal('${ctype.id}', '${ctype.costname}')|" data-toggle="modal" data-target="#exampleModal"> Edit </a></td>
-					<td><a class="btn btn-danger" th:onclick="|app_config.deleteConfig('${ctype.id}')|"> Delete </a></td>
+					<td><a class="btn btn-primary"
+						th:onclick="|app_config.showModal('${ctype.id}', '${ctype.costname}')|"
+						data-toggle="modal" data-target="#exampleModal"> Edit </a></td>
+					<td><a class="btn btn-danger"
+						th:onclick="|app_config.deleteConfig('${ctype.id}')|"> Delete
+					</a></td>
 				</tr>
 
 				<tr v-if="selected_config === 'permtype'"
 					th:each="ptype : ${permtypes}">
 					<td th:text="${ptype.id}">ID</td>
 					<td th:text="${ptype.permname}">NAME</td>
-					<td><a class="btn btn-primary" th:onclick="|app_config.showModal('${ptype.id}', '${ptype.permname}')|" data-toggle="modal" data-target="#exampleModal"> Edit </a></td>
-					<td><a class="btn btn-danger" th:onclick="|app_config.deleteConfig('${ptype.id}')|"> Delete </a></td>
+					<td><a class="btn btn-primary"
+						th:onclick="|app_config.showModal('${ptype.id}', '${ptype.permname}')|"
+						data-toggle="modal" data-target="#exampleModal"> Edit </a></td>
+					<td><a class="btn btn-danger"
+						th:onclick="|app_config.deleteConfig('${ptype.id}')|"> Delete
+					</a></td>
 				</tr>
 
 				<tr v-if="selected_config === 'statustype'"
 					th:each="stype : ${status}">
 					<td th:text="${stype.id}">ID</td>
 					<td th:text="${stype.statusname}">NAME</td>
-					<td><a class="btn btn-primary" th:onclick="|app_config.showModal('${stype.id}', '${stype.statusname}')|" data-toggle="modal" data-target="#exampleModal"> Edit </a></td>
-					<td><a class="btn btn-danger" th:onclick="|app_config.deleteConfig('${stype.id}')|"> Delete </a></td>
+					<td><a class="btn btn-primary"
+						th:onclick="|app_config.showModal('${stype.id}', '${stype.statusname}')|"
+						data-toggle="modal" data-target="#exampleModal"> Edit </a></td>
+					<td><a class="btn btn-danger"
+						th:onclick="|app_config.deleteConfig('${stype.id}')|"> Delete
+					</a></td>
 				</tr>
 			</tbody>
 		</table>
 
 		<div class="myForm">
-			<form th:action="@{/app/api/costtype}" method="post">
+			<form th:action="@{/configure}" method="get">
 				<div class="modal fade" id="exampleModal" tabindex="-1"
 					role="dialog" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
@@ -78,18 +92,20 @@
 							<div class="modal-body">
 
 								<div class="form-group">
-									<label for="id" class="col-form-label">Id:</label>
-									<input type="text" class="form-control " disabled="disabled" id="id" name="id" v-bind:value="id" />
+									<label for="id" class="col-form-label">Id:</label> <input
+										type="text" class="form-control " disabled="disabled" id="id"
+										name="id" v-bind:value="id" />
 								</div>
-									<div class="form-group">
-									<label for="name" class="col-form-label">Name:</label>
-									<input type="text" class="form-control" id="name" name="name" v-bind:value="name" />
+								<div class="form-group">
+									<label for="name" class="col-form-label">Name:</label> <input
+										type="text" class="form-control" id="name" name="name"
+										v-model="name" />
 								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Close</button>
-								<input type="submit" class="btn btn-primary" value="save"/>
+								<input type="submit" v-on:click="createConfig()" class="btn btn-primary" />
 							</div>
 						</div>
 					</div>
@@ -97,20 +113,10 @@
 
 			</form>
 		</div>
-		
-		
-
 	</div>
 </body>
 <div th:replace="fragments/footer :: foot"></div>
-	<script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"></script>
-	<script src="/js/app-config.js"></script>
-	<script type="text/javascript" th:src="@{js/main.js}" src="/js/main.js">
-	$(document).ready(function() {
-		$('.table .eBtn').on('click',function(event){
-			console.log('hello');
-		});
-	});
-	</script>
+<script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/js/app-config.js"></script>
 </div>
 </html>

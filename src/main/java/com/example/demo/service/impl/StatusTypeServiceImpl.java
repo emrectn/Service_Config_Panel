@@ -16,7 +16,7 @@ public class StatusTypeServiceImpl implements StatusTypeService{
 	private StatusTypeRepository statusTypeRepository;
 	
 	@Override
-	public boolean isUserTeamExist(StatusType statusType) {
+	public boolean isStatusTypeExist(StatusType statusType) {
 		return statusTypeRepository.findByStatusname(statusType.getStatusname()) != null;
 	}
 
@@ -31,8 +31,9 @@ public class StatusTypeServiceImpl implements StatusTypeService{
 	}
 
 	@Override
-	public void save(StatusType statusType) {
+	public StatusType save(StatusType statusType) {
 		statusTypeRepository.save(statusType);
+		return statusType;
 	}
 
 	@Override

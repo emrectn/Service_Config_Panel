@@ -12,7 +12,7 @@ public interface CostTypeService {
 	
 	CostType findById(Integer id);
 	
-	void save(CostType costType);
+	CostType save(CostType costType);
 	
 	void deleteById(Integer id);
 	

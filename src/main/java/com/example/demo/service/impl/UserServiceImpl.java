@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Role;
@@ -30,12 +29,11 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User findUserByEmailAndPassword(String email, String password) {
-		User user = new User();
-		@SuppressWarnings("unchecked")
-		List<User> userList = (List<User>) userRepository.findByEmailAndPassword(email, password);
+
+		User user = userRepository.findByEmailAndPassword(email, password);
 		
-		if(!userList.isEmpty()) {
-			user = userList.get(0);
+		if(user == null) {
+			return null;
 		}
 		return user;
 	}

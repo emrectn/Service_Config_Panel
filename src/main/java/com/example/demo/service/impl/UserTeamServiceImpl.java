@@ -31,8 +31,9 @@ public class UserTeamServiceImpl implements UserTeamService{
 	}
 
 	@Override
-	public void save(UserTeam userTeam) {
+	public UserTeam save(UserTeam userTeam) {
 		userTeamRepository.save(userTeam);
+		return userTeam;
 	}
 
 	@Override

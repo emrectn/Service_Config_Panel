@@ -12,7 +12,7 @@ public interface PermTypeService {
 	
 	PermType findById(Integer id);
 	
-	void save(PermType permType);
+	PermType save(PermType permType);
 	
 	void deleteById(Integer id);
 	

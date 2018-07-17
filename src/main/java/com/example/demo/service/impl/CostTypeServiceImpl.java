@@ -26,8 +26,9 @@ public class CostTypeServiceImpl implements CostTypeService{
 	}
 
 	@Override
-	public void save(CostType costType) {
+	public CostType save(CostType costType) {
 		costTypeRepository.save(costType);
+		return costType;
 	}
 
 	@Override

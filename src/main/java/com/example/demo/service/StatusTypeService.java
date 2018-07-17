@@ -6,13 +6,13 @@ import com.example.demo.model.StatusType;
 
 public interface StatusTypeService {
 	
-	boolean isUserTeamExist(StatusType statusType);
+	boolean isStatusTypeExist(StatusType statusType);
 	
 	List<StatusType> findAll();
 	
 	StatusType findById(Integer id);
 	
-	void save(StatusType statusType);
+	StatusType save(StatusType statusType);
 	
 	void deleteById(Integer id);
 	

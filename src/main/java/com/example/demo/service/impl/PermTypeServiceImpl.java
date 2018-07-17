@@ -31,8 +31,9 @@ public class PermTypeServiceImpl implements PermTypeService{
 	}
 
 	@Override
-	public void save(PermType permType) {
+	public PermType save(PermType permType) {
 		permTypeRepository.save(permType);
+		return permType;
 	}
 
 	@Override
