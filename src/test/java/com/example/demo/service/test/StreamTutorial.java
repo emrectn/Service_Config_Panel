@@ -104,6 +104,13 @@ public class StreamTutorial {
 		List<String> names = Stream.of(firstNames, lastNames).flatMap(l -> l.stream()).collect(Collectors.toList());
 		names.forEach(System.out::println);
 		
+		/* Source
+		 * https://medium.com/@sinanselimoglu/java-8-stream-yap%C4%B1s%C4%B1na-nazik-bir-giri%C5%9F-f2a5977215c6
+		 * https://medium.com/@sinanselimoglu/java-8-streams-fonksiyonlar-2-82ab8b309b15
+		 * https://medium.com/@sinanselimoglu/java-8-streams-paralel-i%CC%87%C5%9Flemler-3-a01233c8fd9f
+		 * 
+		 * */
+		
 
 		
 		
