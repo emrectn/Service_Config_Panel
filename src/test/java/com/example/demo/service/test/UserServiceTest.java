@@ -48,7 +48,7 @@ public class UserServiceTest {
 	@InjectMocks
 	private UserService userService = new UserServiceImpl();
 	
-	public static final Logger logger = LoggerFactory.getLogger(StatusTypeController.class);
+	public static final Logger logger = LoggerFactory.getLogger(UserServiceTest.class);
 	
 	@Before
 	public void beforeTest() {

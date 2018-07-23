@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.UserTeam;
 
-@Repository
+@Repository("userTeamRepository")
 public interface UserTeamRepository extends JpaRepository<UserTeam, Integer>{
 	
 	UserTeam findByTeamname(String teamName);

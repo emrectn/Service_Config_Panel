@@ -37,4 +37,10 @@ public class RegisterServiceImpl implements RegisterService{
 		
 	}
 
+	@Override
+	public void deleteById(Integer id) {
+		registerRepository.deleteById(id);
+		
+	}
+
 }

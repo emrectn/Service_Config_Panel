@@ -80,8 +80,6 @@ public class User implements Serializable {
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 	
-	
-	
 	public int getActive() {
 		return active;
 	}
@@ -189,16 +187,15 @@ public class User implements Serializable {
 	public void setUpdaterRegisters(List<Register> updaterRegisters) {
 		this.updaterRegisters = updaterRegisters;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", name=" + name + ", password=" + password + ", surname="
-				+ surname + ", userlog=" + userlog + ", userrole=" + userrole + ", permtype=" + permtype + ", userteam="
-				+ userteam + "]";
+				+ surname + ", userlog=" + userlog + ", userrole=" + userrole + ", createrRegisters=" + createrRegisters
+				+ ", updaterRegisters=" + updaterRegisters + ", permtype=" + permtype + ", userteam=" + userteam
+				+ ", active=" + active + ", roles=" + roles + "]";
 	}
 	
-	
-	
+		
 
 }

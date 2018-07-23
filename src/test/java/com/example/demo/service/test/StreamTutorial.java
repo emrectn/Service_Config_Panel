@@ -14,14 +14,20 @@ import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.demo.MainApplication;
+import com.example.demo.controller.StatusTypeController;
 import com.example.demo.model.PermType;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.PermTypeService;
-
+import com.example.demo.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = MainApplication.class)
@@ -29,6 +35,11 @@ public class StreamTutorial {
 
 	@Autowired
 	private PermTypeService permTypeService;
+	
+	@Autowired
+	private UserRepository userRepository;
+
+	public static final Logger logger = LoggerFactory.getLogger(StreamTutorial.class);
 
 	@Test
 	public void deneme() {
@@ -110,9 +121,7 @@ public class StreamTutorial {
 		 * https://medium.com/@sinanselimoglu/java-8-streams-paralel-i%CC%87%C5%9Flemler-3-a01233c8fd9f
 		 * 
 		 * */
-		
 
-		
 		
 	}
 }

@@ -51,7 +51,7 @@ public class Register implements Serializable {
 	//@Temporal(value = TemporalType.TIMESTAMP) Tam zamanı istenirse
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="startdate", nullable=false)
+	@Column(name="startdate")
 	private Date startdate;
 	
 	@Temporal(TemporalType.DATE)
@@ -62,12 +62,12 @@ public class Register implements Serializable {
 	private String tag;
 	
 	@ManyToOne
-	@JoinColumn(name="cost_id", nullable=false)
+	@JoinColumn(name="cost_id")
 	private CostType costType;
 	
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="create_user_id", nullable=false)
+	@JoinColumn(name="create_user_id")
 	private User creater;
 
 	//bi-directional many-to-one association to User

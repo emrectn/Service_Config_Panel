@@ -11,6 +11,7 @@ var app = new Vue({
         'team_names': [],
         'status_types': [],
         'a': '',
+        'formData' : {},
         'upHere': false
     },
 
@@ -32,7 +33,16 @@ var app = new Vue({
         deleteConfig(){
             id = document.getElementById('id').value;
             console.log(id);
-            axios.get("/delete?id="+id);
+            let self = this;
+            axios({
+            	method:'delete',
+            	url:'/app/api/register/' + id,
+     	   }).then(function (response) {
+    		   console.log(response + " : Başarılı");
+    	   
+    	   }).catch(function (error) {
+    		   console.log(error + ": Hata oluştu");
+    	   })
         },
 
         fetchCostTypes() {
@@ -51,6 +61,31 @@ var app = new Vue({
             axios.get("/app/api/statustype").then(function(response){
                 this.status_types = response.data;
             }.bind(this));
+       },
+       
+       addConfig() {
+    	   var formObj = document.getElementById("addRegister").elements;
+    	   this.formData['tag'] = formObj.namedItem("tag").value;
+    	   this.formData['cfp'] = formObj.namedItem("cfp").value;
+    	   this.formData['ftid'] = formObj.namedItem("ftid").value;
+    	   this.formData['jiratask'] = formObj.namedItem("jiratask").value;
+    	   this.formData['springt'] = formObj.namedItem("springt").value;
+    	   this.formData['defination'] = formObj.namedItem("defination").value;
+    	   this.formData['hour'] = this.selected_hour;
+    	   
+    	   console.log(this.formData);
+    	   
+    	   let self = this;
+    	   axios({
+    		  method: 'post',
+    		  url: '/app/api/register',
+    		  data: self.formData
+    	   }).then(function (response) {
+    		   console.log(response + " : Başarılı");
+    	   
+    	   }).catch(function (error) {
+    		   console.log(error + ": Hata oluştu");
+    	   })
        },
 
        snackBarShow(a) {

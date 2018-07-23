@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.Register;
 import com.example.demo.model.UserTeam;
 
-@Repository("register")
+@Repository("registerRepository")
 public interface RegisterRepository extends JpaRepository<Register, Integer>{
 	
 	List<Register> findByRegisterUserteam(UserTeam teamId);

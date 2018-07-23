@@ -1,6 +1,6 @@
 <div th:fragment="main-form" class="container">
 	<h2>Add New Task</h2>
-	<form class="form-horizontal" th:action="@{/app/api/register}" method="post">
+	<form id="addRegister" class="form-horizontal" action="/app/api/register" method="post">
 
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="name">TAG:</label>
@@ -13,7 +13,7 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="type">CFP:</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="type" placeholder="A00"
+				<input type="text" class="form-control" id="cfp" placeholder="A00"
 					name="cfp">
 			</div>
 		</div>
@@ -21,7 +21,7 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="value">FT_ID:</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="value"
+				<input type="text" class="form-control" id="ftid"
 					placeholder="FTID01" name="ftid">
 			</div>
 		</div>
@@ -29,7 +29,7 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="value">JIRA TASK:</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="is_Active"
+				<input type="text" class="form-control" id="jiratask"
 					placeholder="TASK01" name="jiratask">
 			</div>
 		</div>
@@ -38,15 +38,15 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="value">SPRINT</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="app_name"
-					placeholder="App Name" name="0-29">
+				<input type="text" class="form-control" id="springt"
+					placeholder="App Name" name="springt">
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="value">COST TYPE:</label>
 			<div class="col-sm-3">
-				<select v-model="selected_costtype">
+				<select id="selected_costtype" v-model="selected_costtype" name="costType">
 				  <option disabled value="">Please Select Cost</option>
 				  <option v-for="ctype in cost_types" v-bind:value="ctype.id">{{ctype.costname | Upper}}</option>
 				</select>
@@ -54,7 +54,7 @@
 
 			<label class="control-label col-sm-2" for="value">HOUR:</label>
 			<div class="col-sm-3">
-				<select v-model="selected_hour">
+				<select id="selected_hour" v-model="selected_hour" name="hour">
 				  <option disabled value="">Please Select Hour</option>
 				 <option v-for="n in 40" v-bind:value="n">{{n}}</option>
 				</select>
@@ -64,7 +64,7 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="value">TEAM:</label>
 			<div class="col-sm-3">
-				<select v-model="selected_teamname">
+				<select id="selected_teamname" v-model="selected_teamname" name="registerUserteam">
 				  <option disabled value="">Please Select Team</option>
 				  <option v-for="tname in team_names" v-bind:value="tname.id">{{tname.teamname | Upper}}</option>
 				</select>
@@ -72,7 +72,7 @@
 
 			<label class="control-label col-sm-2" for="value">STATUS:</label>
 			<div class="col-sm-3">
-				<select v-model="selected_status">
+				<select id="selected_status" v-model="selected_status" name="statusType">
 				  <option disabled value="">Please Select Status</option>
 				  <option v-for="stype in status_types" v-bind:value="stype.id">{{stype.statusname | Upper}}</option>
 				</select>
@@ -82,13 +82,13 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="comment">DEFINATION:</label>
 			<div class="col-sm-10">
-				<textarea class="form-control" rows="5" id="comment"></textarea>
+				<textarea class="form-control" name="defination" rows="5" id="comment"></textarea>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" v-on:click='addConfig()'
+				<button type="submit"
 					class="btn btn-success">Add New Config</button>
 			</div>
 		</div>

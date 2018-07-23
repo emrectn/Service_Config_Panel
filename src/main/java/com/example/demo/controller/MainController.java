@@ -43,7 +43,6 @@ public class MainController {
 	public ModelAndView index(Authentication authentication) {
 		logger.error("GetAut : "+authentication.getName());
 		logger.error("GetRole : "+authentication.getAuthorities());
-		logger.error("RegisterList : " + registerService.findByTeamId(userService.findUserByEmail(authentication.getName())));
 		ModelAndView model = new ModelAndView("index");
 		model.addObject("name", authentication.getName());
 		model.addObject("registers", registerService.findByTeamId(userService.findUserByEmail(authentication.getName())));
@@ -71,12 +70,15 @@ public class MainController {
 	public ModelAndView configure(Authentication authentication) {
 		ModelAndView model = new ModelAndView("configure");
 		model.addObject("name", authentication.getName());
-		logger.error("costtypes : " + costTypeService.findAll());
-		logger.error("permtype : " + permTypeService.findAll());
-		logger.error("status : " + statusTypeService.findAll());
 		model.addObject("costtypes", costTypeService.findAll());
 		model.addObject("permtypes", permTypeService.findAll());
 		model.addObject("status", statusTypeService.findAll());
+		return model;
+	}
+	
+	@RequestMapping("/deneme")
+	public ModelAndView deneme(Authentication authentication) {
+		ModelAndView model = new ModelAndView("denemee");
 		return model;
 	}
 

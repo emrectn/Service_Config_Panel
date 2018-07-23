@@ -23,9 +23,6 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
     private RoleRepository roleRepository;
-//	
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	public User findUserByEmailAndPassword(String email, String password) {

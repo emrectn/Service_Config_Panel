@@ -13,7 +13,7 @@
 	<div id="app" class="container" >
 		<div v-show="selected=='home'">
 		  <h2>Task Manager</h2>
-		  <p>List of Task <span th:text = "${registers.size()}" class="badge"></span> <br></p>            
+<!-- 		  <p>List of Task <span th:text = "${registers.size()}" class="badge"></span> <br></p>   -->          
 		  <table class="table table-striped table-hover">
 		    <thead>
 		      <tr>
@@ -29,7 +29,7 @@
 		        <th>HOUR</th>
 		        <th>SPRINT</th>
 		        <th>TEAM</th>
-		        <th>TEAM</th>
+		        <th>STATUS</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -46,7 +46,7 @@
 		        <td th:text="${register.hour}">HOUR</td>
 		        <td th:text="${register.springt}">springt</td>
 		        <td th:text="${register.registerUserteam.getTeamname()}">TEAM</td>
-		        <td>ANALİZ</td>
+		        <td th:text="${register.statusType.getStatusname()}">ANALİZ</td>
 		      </tr>
 		    </tbody>
 		  </table>
