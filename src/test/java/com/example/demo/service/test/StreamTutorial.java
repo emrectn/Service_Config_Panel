@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -23,11 +24,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.demo.MainApplication;
-import com.example.demo.controller.StatusTypeController;
 import com.example.demo.model.PermType;
+import com.example.demo.model.Register;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.PermTypeService;
-import com.example.demo.service.UserService;
+import com.example.demo.service.RegisterService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = MainApplication.class)
@@ -35,6 +36,9 @@ public class StreamTutorial {
 
 	@Autowired
 	private PermTypeService permTypeService;
+	
+	@Autowired
+	private RegisterService registerService;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -47,6 +51,8 @@ public class StreamTutorial {
 		String a = null;
 		
 		List<PermType> permTypes = permTypeService.findAll();
+		
+		List<Register> registers = registerService.findAll();
 				
 		PermType permType = new PermType.Builder()
 				.withPermName("")
@@ -121,7 +127,15 @@ public class StreamTutorial {
 		 * https://medium.com/@sinanselimoglu/java-8-streams-paralel-i%CC%87%C5%9Flemler-3-a01233c8fd9f
 		 * 
 		 * */
-
+		
+		//Object Sorted
+		System.out.println("-----------------------------");
+		System.out.println("Object Sorted");
+//		Yontem 1:
+//		registers.stream().sorted((o1, o2)->o1.getId().compareTo(o2.getId())).forEach(s -> System.out.println(" + " + s));
+		
+//		Yontem 2:
+		registers.stream().sorted(Comparator.comparing(Register::getId).reversed()).forEach(s -> System.out.println(" + " + s));;
 		
 	}
 }

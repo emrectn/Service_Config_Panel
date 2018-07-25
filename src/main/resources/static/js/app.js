@@ -12,7 +12,8 @@ var app = new Vue({
         'status_types': [],
         'a': '',
         'formData' : {},
-        'upHere': false
+        'upHere': false,
+        'notify': false,
     },
 
     created: function () {
@@ -25,6 +26,7 @@ var app = new Vue({
         this.fetchTeamNames();
         this.fetchStatusTypes();
     },
+    
     methods: {
         fetchConfigs(){
             console.log("Hosgeldin Sahip");
@@ -62,7 +64,7 @@ var app = new Vue({
                 this.status_types = response.data;
             }.bind(this));
        },
-       
+    
        addConfig() {
     	   var formObj = document.getElementById("addRegister").elements;
     	   this.formData['tag'] = formObj.namedItem("tag").value;
@@ -98,6 +100,16 @@ var app = new Vue({
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 4000);
        },
+       
+   		getParams() {
+	   		var vars={};
+	   		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+   				function(m,key,value) {
+	   			  value = value.split("+").join(" ");
+   			      vars[key] = value;
+   			    });
+		    return vars;
+   		},
     },
 
     filters: {

@@ -62,19 +62,7 @@ public class UserServiceTest {
 		when(userRepository.save(response)).thenReturn(response);
 		
 	}
-	
-	@Test
-	public void testUserByEmailAndPassword_valid_returnUser() {
-		User user = userService.findUserByEmailAndPassword("test@test.com", "test");
-		assertNotNull(user);
-	}
-	
-	@Test
-	public void testUserByEmailAndPassword_invalid_returnUser() {
-		User user = userService.findUserByEmailAndPassword("GECERSİZt@test.com", "GECERSİZ");
-		assertNull(user);
-	}
-	
+
 	@Test
 	public void testFindUserByEmail_validEmail_returnUser() {
 		User user = userService.findUserByEmail("test@test.com");
