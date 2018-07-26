@@ -36,6 +36,17 @@
 				</tr>
 			</thead>
 			<tbody>
+				<tr v-if="selected_config === 'userteam'"
+					th:each="userteam : ${userteams}">
+					<td th:text="${userteam.id}">ID</td>
+					<td th:text="${userteam.teamname}">NAME</td>
+					<td><a class="btn btn-primary"
+						th:onclick="|app_config.showModal('${userteam.id}', '${userteam.teamname}')|"
+						data-toggle="modal" data-target="#exampleModal"> Edit </a></td>
+					<td><a class="btn btn-danger"
+						th:onclick="|app_config.deleteConfig('${userteam.id}')|"> Delete
+					</a></td>
+				</tr>
 				<tr v-if="selected_config === 'costtype'"
 					th:each="ctype : ${costtypes}">
 					<td th:text="${ctype.id}">ID</td>
@@ -75,7 +86,7 @@
 		</table>
 
 		<div class="myForm">
-			<form th:action="@{/configure}" method="get">
+			<form>
 				<div class="modal fade" id="exampleModal" tabindex="-1"
 					role="dialog" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
@@ -105,7 +116,8 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Close</button>
-								<input type="submit" v-on:click="createConfig()" class="btn btn-primary" />
+								<button v-on:click="createConfig()" type="button"
+									class="btn btn-primary">Submit</button>
 							</div>
 						</div>
 					</div>

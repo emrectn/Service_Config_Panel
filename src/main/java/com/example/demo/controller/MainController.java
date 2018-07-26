@@ -74,6 +74,7 @@ public class MainController {
 	public ModelAndView configure(Authentication authentication) {
 		ModelAndView model = new ModelAndView("configure");
 		model.addObject("name", authentication.getName());
+		model.addObject("userteams", userTeamService.findAll());
 		model.addObject("costtypes", costTypeService.findAll());
 		model.addObject("permtypes", permTypeService.findAll());
 		model.addObject("status", statusTypeService.findAll());
