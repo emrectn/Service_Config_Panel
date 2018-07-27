@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import com.example.demo.service.UserTeamService;
 
 
 @RestController
@@ -25,13 +28,15 @@ public class AuthRestController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserTeamService userTeamService;
 
 	public static final Logger logger = LoggerFactory.getLogger(CostTypeController.class);
 	
 	@GetMapping("/app/api/auth/login")
 	public @ResponseBody String login(Authentication  authentication) {
 		String msg = "";
-		System.out.println("--" + authentication.getAuthorities());
 		logger.error("GetAut : "+authentication.getAuthorities());
 		
 		for (GrantedAuthority authority : authentication.getAuthorities()) {
@@ -57,6 +62,8 @@ public class AuthRestController {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
 		modelAndView.addObject("user", user);
+		modelAndView.addObject("userteams", userTeamService.findAll().stream().map(s-> s.getTeamname()).collect(Collectors.toList()));
+		modelAndView.addObject("asd","helleo");
 		modelAndView.setViewName("registration");
 		return modelAndView;
 	}

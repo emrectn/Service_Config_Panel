@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Register;
 import com.example.demo.model.User;
+import com.example.demo.model.UserTeam;
 import com.example.demo.service.CostTypeService;
 import com.example.demo.service.PermTypeService;
 import com.example.demo.service.RegisterService;
@@ -53,26 +56,11 @@ public class MainController {
 		return model;
 	}
 
-	@RequestMapping("/register")
-	public ModelAndView register() {
-		ModelAndView model = new ModelAndView("register");
-		model.addObject("msg", "oldu mpu kardeş?");
-		return model;
-	}
-
-	@RequestMapping("/search")
-	public String search() {
-		return "search";
-	}
-	
-	@RequestMapping("/admin")
-	public String admin() {
-		return "admün";
-	}
 	
 	@RequestMapping("/configure")
 	public ModelAndView configure(Authentication authentication) {
 		ModelAndView model = new ModelAndView("configure");
+		
 		model.addObject("name", authentication.getName());
 		model.addObject("userteams", userTeamService.findAll());
 		model.addObject("costtypes", costTypeService.findAll());
@@ -81,10 +69,5 @@ public class MainController {
 		return model;
 	}
 	
-	@RequestMapping("/deneme")
-	public ModelAndView deneme(Authentication authentication) {
-		ModelAndView model = new ModelAndView("denemee");
-		return model;
-	}
 
 }
